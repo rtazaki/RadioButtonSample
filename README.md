@@ -17,7 +17,7 @@ mapを用意して、ラジオボタンを強引にindex likeに動かした。
 - 選択したラジオボタンのidを取る方法が分からないので、  
 newValueをstring化し、正規表現を用いて、数字を取るという荒業で  
 無理やり実装したが、ほかにいい方法があるはずなのでぜひ教えてほしい。
-- map2:色情報を取りたかったので、荒業の組み合わせで文字列をColor化して
+- map2:色情報を取りたかったので、荒業の組み合わせで文字列をColor化して  
 矩形色を変えている。Castでいけるんじゃない?って思っているが、  
 Cast方法さえも分からない。困った。
 
@@ -26,7 +26,10 @@ Cast方法さえも分からない。困った。
 明記しておく。(何も知らないところから、どこをいじると、何か動かせるのか  
 差分で理解する。)  
 - build.gradle(修正情報は以下の通り。)
-- Main.kt 起動はここからやる。
+- ApplicationとControllerとfxmlを作る。
+- ただし、ディレクトリは自分で作る。(パス構成に細かく書いた。)
+- resourcesフォルダは、src/mainの下。
+- それ以外は、IDEが勝手に作るファイル。
 
 #### [参考]gradle helloworld
 build.gradleに、
@@ -34,7 +37,21 @@ build.gradleに、
 apply plugin: 'application'
 mainClassName = 'sample.com.MainApplication'
 ```
-を追加し、Main.ktを呼ぶ。
+を追加し、MainApplicationを呼ぶ。  
+(javafxの場合、基底クラスである、Applicationクラスのmainが呼ばれるため、  
+あえてMain.ktを呼ばなくてもよい。)
+
+#### [参考]javafx 参考コード
+いろいろググった結果、画面遷移させない前提だと、以下の構成になる  
+- ○○Application.kt
+- ●●Controller.kt
+- ●●.fxml
+○○:●● = 1:nの関係で、2画面、3画面と増えた時には、
+- △△Controller.kt
+- △△.fxml
+- □□Controller.kt
+- □□.fxml  
+というペアが増えていく感じ。
 
 #### [参考]走らせ方
 - IDEでgradleの設定(Edit Configurations..)で以下のように設定  
