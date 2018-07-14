@@ -37,8 +37,9 @@ class MainController : Initializable {
         rgbIndexField.textProperty().addListener { _, _, newValue ->
             try {
                 if (newValue.toInt() < 3) {
-                    println(newValue)
+                    println("TextField: $newValue")
                     rgbColorGroup.selectToggle(map1[newValue.toInt()])
+                    rgbChoice.selectionModel.select(newValue.toInt())
                 }
             } catch (exception: NumberFormatException) {
                 // 数字以外の入力は無視
@@ -57,8 +58,11 @@ class MainController : Initializable {
             val colorstr = color.find(newValue.toString())?.value?.replace("'", "")
             rgbResultRectangle.fill = map2[colorstr]
         }
-        // 選択画面 -> TextField
+        // ChoiceBox -> TextField
         rgbChoice.items.addAll("赤", "緑", "青")
-        rgbChoice.pr
+        rgbChoice.selectionModel.selectedIndexProperty().addListener { _, _, newValue ->
+            println("ChoiceBox: $newValue")
+            rgbIndexField.text = newValue.toString()
+        }
     }
 }
