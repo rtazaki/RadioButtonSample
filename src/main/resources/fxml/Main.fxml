@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -20,4 +21,5 @@
         <TextField fx:id="rgbIndexField" text="0"/>
         <Rectangle fx:id="rgbResultRectangle" height="20.0" width="200.0"/>
     </VBox>
+    <ChoiceBox fx:id="rgbChoice" layoutX="200.0" layoutY="2.0" prefWidth="150.0"/>
 </AnchorPane>
