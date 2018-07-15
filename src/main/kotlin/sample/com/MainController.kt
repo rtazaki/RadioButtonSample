@@ -29,6 +29,7 @@ class MainController : Initializable {
 
     @FXML
     lateinit var rgbChoice: ChoiceBox<String>
+    private var isChoiseCancel = false
 
     override fun initialize(location: URL?, resources: ResourceBundle?) {
         // TextField -> RadioButton
@@ -39,6 +40,15 @@ class MainController : Initializable {
                 if (newValue.toInt() < 3) {
                     println("TextField: $newValue")
                     rgbColorGroup.selectToggle(map1[newValue.toInt()])
+                    // 今回のお題:
+                    // 間接的にChoiceBoxの選択を変えた場合に、selectedIndexPropertyイベントを
+                    // 発行しないようにする。
+                    // 理由:
+                    // ChoiceBox変更 → やりたいこと というのは出来ていたが、
+                    // やりたいこと → ChoiceBox変更 → やりたいことという呼び出しで
+                    // やりたいことが2回発生してしまうことへの対策。
+                    if (rgbChoice.selectionModel.selectedIndex != newValue.toInt())
+                        isChoiseCancel = true
                     rgbChoice.selectionModel.select(newValue.toInt())
                 }
             } catch (exception: NumberFormatException) {
@@ -61,8 +71,11 @@ class MainController : Initializable {
         // ChoiceBox -> TextField
         rgbChoice.items.addAll("赤", "緑", "青")
         rgbChoice.selectionModel.selectedIndexProperty().addListener { _, _, newValue ->
-            println("ChoiceBox: $newValue")
-            rgbIndexField.text = newValue.toString()
+            if (!isChoiseCancel) {
+                println("ChoiceBox: $newValue")
+                rgbIndexField.text = newValue.toString()
+            }
+            isChoiseCancel = false
         }
     }
 }

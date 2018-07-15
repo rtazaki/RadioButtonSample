@@ -18,7 +18,7 @@
         </RadioButton>
         <RadioButton fx:id="rgbColor1" text="Green" toggleGroup="$rgbColorGroup"/>
         <RadioButton fx:id="rgbColor2" text="Blue" toggleGroup="$rgbColorGroup"/>
-        <TextField fx:id="rgbIndexField" text="0"/>
+        <TextField fx:id="rgbIndexField"/>
         <Rectangle fx:id="rgbResultRectangle" height="20.0" width="200.0"/>
     </VBox>
     <ChoiceBox fx:id="rgbChoice" layoutX="200.0" layoutY="2.0" prefWidth="150.0"/>
